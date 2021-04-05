@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: C:\Users\i340544\Downloads\kompose-windows-amd64.exe -f .\docker-compose.yml
+      -f .\docker-compose-inits.yml convert
+    kompose.version: 1.21.0 (992df58d8)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: taiga-gateway
+  name: taiga-gateway
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: taiga-gateway
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: C:\Users\i340544\Downloads\kompose-windows-amd64.exe -f .\docker-compose.yml
+          -f .\docker-compose-inits.yml convert
+        kompose.version: 1.21.0 (992df58d8)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/taiga: "true"
+        io.kompose.service: taiga-gateway
+    spec:
+      containers:
+      - image: gunter04/taiganginx
+        imagePullPolicy: ""
+        name: taiga-gateway
+        ports:
+        - containerPort: 80
+        resources: {}
+      restartPolicy: Always
+      serviceAccountName: ""
+      volumes: null
+status: {}
